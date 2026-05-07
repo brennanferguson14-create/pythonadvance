@@ -1,0 +1,46 @@
+import random
+
+def hangman():
+  wordlist = ["real madrid","barcelona","manchester united","newcastle","paris saint germain","bayern munchen","juventus","ac milan","inter milan"]
+  wordtoguess = random.choice(wordlist)
+  guessedword = ["_"] * len(wordtoguess)
+  
+  maxattempts = 5
+  attempts = 0
+  guessedletters = []
+  
+  print("welcome to my soccer hangman game guess the word one letter at a time")
+  print("word: "+" ".join(guessedword))
+  
+  while attempts<maxattempts and "_" in guessedword:
+    guess = input("enter a letter: ").lower()
+    
+    if len(guess)!=1 or not guess.isalpha():
+      print("enter a single letter")
+      continue
+    
+    if guess in guessedletters:
+      print("you already guessed that letter")
+      continue
+    
+    guessedletters.append(guess)
+    
+    if guess in wordtoguess:
+      print("it is int the word")
+      for i in range(len(wordtoguess)):
+        if wordtoguess[i]==guess:
+          guessedword[i]=guess
+    else:
+      attempts = attempts + 1
+      print("the letter is not in the word you have {} attempts left".format(maxattempts-attempts))
+      
+    print("word: "+" ".join(guessedword))
+    print("guessed letters: "+",".join(guessedletters))
+    
+  if "_" not in guessedword:
+    print("you have got the word correct")
+  else:
+    ("game over the word was {}".format(wordtoguess))
+    
+hangman()
+      
